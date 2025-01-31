@@ -6,7 +6,8 @@ const supabaseUrl = "https://ifzzsotblxyxneozztvy.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlmenpzb3RibHh5eG5lb3p6dHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY3OTExMDgsImV4cCI6MjA1MjM2NzEwOH0.TBd80MjgNQw5WPaysnzRDj08ob9QT4EzkfClWJ4FO48";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-console.log("✅ Supabase Connected!");
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const newDataBtn = document.querySelector('#new-data-btn');
@@ -22,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const wtrmrkCont = document.querySelector('#wtrmrk-cont');
     const submitEditedData = document.querySelector('#edit_Data');
 
+    let reveal = document.querySelector('#reveal')
+    let load = document.querySelector('#load')
+
     submitEditedData.style.display = 'none';
+
 
     newDataBtn.addEventListener('click', () => {
         setTimeout(() => {
@@ -54,14 +59,22 @@ document.addEventListener('DOMContentLoaded', () => {
     submitData.addEventListener('click', async (event) => {
         event.preventDefault();
 
+        if (nameBar.value != "" && emailBar.value != "" && rollBar.value != "") {
+            reveal.style.display = 'none'
+            load.classList.remove('none')
+    }
+
         if (wtrmrkCont) {
             wtrmrkCont.style.display = 'none';
         }
 
         if (rollBar.value.length === 5) {
-            crudFormCont.style.display = 'none';
-            resultPage.style.filter = "blur(0px)";
-            shield.style.display = "none";
+            setTimeout(() => {
+                crudFormCont.style.display = 'none';
+                resultPage.style.filter = "blur(0px)";
+                shield.style.display = "none";
+                location.reload()
+            }, 2000);
 
             const { data, error } = await supabase
                 .from('students')
@@ -70,7 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (error) {
                 console.error('Error inserting data:', error);
             } else {
-                console.log('Student data added:', data);
+                setTimeout(() => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Student Added!',
+                        text: 'Student has been added successfully.',
+                        color: 'gainsboro',
+                        confirmButtonColor: '#006239',
+                        heightAuto: false,
+                        focusConfirm: false
+                    });
+                }, 3000);
                 displayStudentData();
             }
 
@@ -85,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Oops...',
                 text: "Roll Number's length must be 5",
                 color: 'gainsboro',
-                border: '1px solid red',
                 confirmButtonColor: '#006239',
                 heightAuto: false,
                 focusConfirm: false
@@ -140,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     title: 'Something went wrong',
                     text: "Failed to update student",
                     color: 'gainsboro',
-                    border: '1px solid red',
                     confirmButtonColor: '#006239',
                     heightAuto: false,
                     focusConfirm: false
@@ -151,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     title: 'Changes made',
                     text: 'Details updated successfully!',
                     color: 'gainsboro',
-                    border: '1px solid red',
                     confirmButtonColor: '#006239',
                     heightAuto: false,
                     focusConfirm: false
@@ -169,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 background: '#111',
                 color: '#fff',
                 confirmButtonColor: 'rgb(0 98 57)',
-                confirmButtonBorder: '1px solid rgb(0 98 57)',
                 backdrop: false,
             });
         }
@@ -187,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 title: 'Oops...',
                 text: "Failed to load student data",
                 color: 'gainsboro',
-                border: '1px solid red',
                 confirmButtonColor: '#006239',
                 heightAuto: false,
                 focusConfirm: false
@@ -232,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .from("students")
                     .delete()
                     .eq("roll_no", rollNo);
-    
+
                 if (error) {
                     console.error("Error deleting student:", error);
                     Swal.fire({
@@ -254,14 +272,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         heightAuto: false,
                         focusConfirm: false
                     });
-    
-                    // Refresh data after deletion
+
+                 
                     displayStudentData();
                 }
             }
         });
     }
-    
+
 
     displayStudentData();
+    
 });
