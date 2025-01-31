@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="https://supabase.com/favicon/apple-icon-60x60.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="std-portal.css">
+    <title>Manage.io • Dashboard</title>
+</head>
+<style>
+</style>
+<body>
+    <main>
+        <nav>
+            <h3 class="logo"><img src="assets/logo.png" draggable="false">Manage.<span>io</span></h3>
+
+            <div class="dets">
+                <button id="logOut">
+                    <abbr title="Log Out">
+                        <div id="displayName">Arhum Hussain</div><i class="ri-logout-box-r-line"></i>
+                    </abbr>
+                </button>
+
+            </div>
+        </nav>
+
+        <div id="hero">
+            <div id="crud-form-cont" class="crud-form-cont none">
+                <form id="crud-form" class="crud-form">
+                    <h1 id="form-heading">
+                        Student Details.
+                        <span id="cross"><i class="ri-close-large-line"></i></span>
+                    </h1>
+                    <input type="text" id="crud-name" placeholder="Input Name" autocomplete="off" spellcheck="false" required>
+                    <input type="email" name="crud-email" id="crud-email" placeholder="Input Email" autocomplete="off"
+                        spellcheck="false" required>
+                    <input type="number" id="roll-no" placeholder="Enter 5-digit Roll No" min="0" max="99999"
+                        oninput="if(this.value.length > 5) this.value = this.value.slice(0,5);" required>
+                    <button type="submit" id="add_Data" class="add_Data">Add Data</button>
+                    <button type="submit" id="edit_Data" class="edit_Data" >Edit Data</button>
+                </form>
+            </div>
+
+            <div id="result-cont" class="result-cont">
+                <div id="shield" class="shield none"></div>
+                <div class="container">
+                    <div id="header-data">
+                        <h2>Student Portal</h2>
+                        <button id="new-data-btn" class="new-data-btn"><img src="assets/plus.svg" draggable="false"><span class="res-none">Add
+                            Student</span></button>
+                    </div>
+
+                    <div id="each-data-cont" class="ed-cont"></div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
