@@ -10,9 +10,41 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="std-portal.css">
     <title>Manage.io • Dashboard</title>
+    <style>
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon {
+            height: 1.5rem;
+            width: 1.5rem;
+            animation: spin 1s linear infinite;
+            stroke: rgb(255, 255, 255);
+        }
+
+        .loading-text {
+            font-size: 20px;
+            line-height: 1rem;
+            font-weight: 700;
+            font-family: dm sans;
+        }
+
+        .none {
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <style>
 </style>
+
 <body>
     <main>
         <nav>
@@ -21,7 +53,7 @@
             <div class="dets">
                 <button id="logOut">
                     <abbr title="Log Out">
-                        <div id="displayName">Log Out</div><i class="ri-logout-box-r-line"></i>
+                        <div id="displayName">Arhum Hussain</div><i class="ri-logout-box-r-line"></i>
                     </abbr>
                 </button>
 
@@ -35,13 +67,38 @@
                         Student Details.
                         <span id="cross"><i class="ri-close-large-line"></i></span>
                     </h1>
-                    <input type="text" id="crud-name" placeholder="Input Name" autocomplete="off" spellcheck="false" required>
+                    <input type="text" id="crud-name" placeholder="Input Name" autocomplete="off" spellcheck="false"
+                        required>
                     <input type="email" name="crud-email" id="crud-email" placeholder="Input Email" autocomplete="off"
                         spellcheck="false" required>
                     <input type="number" id="roll-no" placeholder="Enter 5-digit Roll No" min="0" max="99999"
                         oninput="if(this.value.length > 5) this.value = this.value.slice(0,5);" required>
-                    <button type="submit" id="add_Data" class="add_Data">Add Data</button>
-                    <button type="submit" id="edit_Data" class="edit_Data" >Edit Data</button>
+                    <button type="submit" id="add_Data" class="add_Data">
+
+                        <div id="load" aria-label="Loading..." role="status" class="loader none">
+                            <svg class="icon" viewBox="0 0 256 256">
+                                <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="24"></line>
+                                <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="24"></line>
+                                <line x1="224" y1="128" x2="192" y2="128" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="24"></line>
+                                <line x1="195.9" y1="195.9" x2="173.3" y2="173.3" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="24"></line>
+                                <line x1="128" y1="224" x2="128" y2="192" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="24"></line>
+                                <line x1="60.1" y1="195.9" x2="82.7" y2="173.3" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="24"></line>
+                                <line x1="32" y1="128" x2="64" y2="128" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="24"></line>
+                                <line x1="60.1" y1="60.1" x2="82.7" y2="82.7" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="24"></line>
+                            </svg>
+                            <span class="loading-text">Please wait...</span>
+                        </div>
+                        <span id="reveal" style="font-family: dm sans;">Add Data</span>
+                    </button>
+                    <button type="submit" id="edit_Data" class="edit_Data">Edit Data</button>
                 </form>
             </div>
 
@@ -50,8 +107,9 @@
                 <div class="container">
                     <div id="header-data">
                         <h2>Student Portal</h2>
-                        <button id="new-data-btn" class="new-data-btn"><img src="assets/plus.svg" draggable="false"><span class="res-none">Add
-                            Student</span></button>
+                        <button id="new-data-btn" class="new-data-btn"><img src="assets/plus.svg"
+                                draggable="false"><span class="res-none">Add
+                                Student</span></button>
                     </div>
 
                     <div id="each-data-cont" class="ed-cont"></div>
@@ -63,12 +121,12 @@
         </div>
 
 
-
-
     </main>
-
-
     <script type="module" src="script.js"></script>
+
+    <script>
+       
+    </script>
 </body>
 
 </html>
