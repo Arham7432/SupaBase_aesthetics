@@ -126,7 +126,7 @@ const handleLogin = async (event) => {
                 focusConfirm: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'homePage.html'; // Redirect after login
+                    window.location.href = 'portal.html'; // Redirect after login
                 }
             });
         }
